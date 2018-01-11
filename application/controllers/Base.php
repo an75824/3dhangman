@@ -19,13 +19,11 @@ class Base extends CI_Controller {
 
 	public function firstTry()
 	{
-		/** This will go to the model **/
-		$json = read_file('words/words.json');
-		$arr = json_decode($json,true);
-
+		$this->load->model('word_model');
+		$arr = $this->word_model->getWords();
 		$w = $arr[4]['word']; // this will be the word from json
 		$c = str_split($w); //create an array out of the word
-		$d = ['']; // this will be the user input
+		$d = ['r']; // this will be the user input
 
 		foreach ($c as $char) //This will be the core of the game
 		{
