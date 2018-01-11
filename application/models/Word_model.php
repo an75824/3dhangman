@@ -1,6 +1,12 @@
 <?php
 class Word_model extends CI_Model {
 
+	public function __construct()
+        {
+                parent::__construct();
+		$this->load->helper('file');
+        }
+
 	/**
 	 * Fetches data from the Json file
 	**/
