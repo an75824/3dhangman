@@ -1,6 +1,8 @@
 body {
 	background-color: #eee;
 	margin-top: 50px;
+	font-family: 'Sedgwick Ave Display', cursive;
+	font-size: 40px;
 }
 
 #main_logo {
