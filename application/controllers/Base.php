@@ -6,6 +6,7 @@ class Base extends CI_Controller {
         {       
                 parent::__construct();
 		$this->load->helper('url');
+		$this->load->helper('file');
         }
 
 	public function index()
@@ -15,5 +16,26 @@ class Base extends CI_Controller {
 		$this->load->view('home_page');
 		$this->load->view('footer');
 	}
+
+	public function firstTry()
+	{
+		/** This will go to the model **/
+		$json = read_file('words/words.json');
+		$arr = json_decode($json,true);
+
+		$w = $arr[4]['word']; // this will be the word from json
+		$c = str_split($w); //create an array out of the word
+		$d = ['']; // this will be the user input
+
+		foreach ($c as $char) //This will be the core of the game
+		{
+			if (in_array($char, $d))
+			{
+				echo $char;
+			} else {
+				echo "_ ";
+			}
+		}
+	}//end of method
 }
 
