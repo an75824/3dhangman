@@ -36,7 +36,7 @@ class Game extends CI_Controller {
 	public function userChoice()
 	{
 		//$this->load->view('test');
-		$char_choice = $this->input->post('choice');
+		$char_choice = strtolower($this->input->post('choice'));
 
 		if ($this->storeChar($char_choice))
 		{
