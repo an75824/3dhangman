@@ -1,7 +1,7 @@
 <div class = 'row'>
-	<div class = 'col-md-6' id='hang_image'>
-		<img src = "<?=base_url('assets/img/level0.png');?>" class=img-responsive' alt='The hang!' >
-		<p>Desc: <?=$word['desc'];?></p>
+	<div class = 'col-md-6'>
+		<img src = "<?=base_url('assets/img/level0.png');?>" class=img-responsive' alt='The hang!' id='hang_image' >
+		<p>Desc: <?=$hang_word['desc'];?></p>
 
 	</div>
 	<div class = 'col-md-6'>
@@ -14,3 +14,5 @@
 		</div>
 	</div>
 </div>
+<p class = 'word'><?=$first_str;?></p>
+
