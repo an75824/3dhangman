@@ -23,6 +23,7 @@ class Game extends CI_Controller {
 
 		$session_data = array(
 			'word' => $word,
+			'round' => 0,
 			'user_choice' => array(),
 			'stored_chars' => array() //not needed
 		); //create some session data
@@ -35,9 +36,7 @@ class Game extends CI_Controller {
 
 	public function userChoice()
 	{
-		//$this->load->view('test');
 		$char_choice = strtolower($this->input->post('choice'));
-
 		if ($this->storeChar($char_choice))
 		{
 			$this->getInput(); //store the last structure of the word
@@ -45,7 +44,6 @@ class Game extends CI_Controller {
 		} else {
 			$data['duplicate_char'] = $char_choice;
 			$this->load->view('game_result',$data);
-			//error_log("Duplicated char! $char_choice",0);
 		}
 	}
 
@@ -68,13 +66,15 @@ class Game extends CI_Controller {
 		if (sizeof($storedChars) == 0)
 		{
 			array_push($_SESSION['user_choice'],$char);
+			$this->roundCount();
 			return true;
 		}
 		if (in_array($char,$storedChars))
 		{	
-			return false; //duplicated input - not fair to lose because of this!
+			return false; //do not record duplicated input - not fair to lose because of this!
 		} else {
 			array_push($_SESSION['user_choice'],$char);
+			$this->roundCount();
 			return true;
 		}
 	}//end of method
@@ -96,5 +96,21 @@ class Game extends CI_Controller {
 		$_SESSION['result'] = $result;
 		return $result;
 	}//end of method
-}
+
+	/**
+	 * Keep track of user rounds.
+	**/
+	private function roundCount()
+	{
+		$_SESSION['round']++;
+		$round = $_SESSION['round'];
+
+		if ($round < MAX_TRIES)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
+}//end of class
 
