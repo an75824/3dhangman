@@ -40,6 +40,7 @@ class Game extends CI_Controller {
 
 		if ($this->storeChar($char_choice))
 		{
+			$this->getInput(); //store the last structure of the word
 			$this->load->view('game_result');
 		} else {
 			$data['duplicate_char'] = $char_choice;
