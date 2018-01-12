@@ -2,16 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Game extends CI_Controller {
+
 	public function __construct()
         {       
                 parent::__construct();
+		$this->load->library('session');
 		$this->load->helper(array('url','form'));
         }
 
 	public function index()
 	{
-		$words['word'] = $this->loadWord();
+		$words['hang_word'] = $this->loadWord();
+		$session_data = array(
+			'word' => $words['hang_word']['word'],
+			'user_choice' => array()
+		); //create some session data
+		$this->session->set_userdata($session_data); //store session data
 		$data['title'] = 'Play Hangman';
+		$_SESSION['test'] = array();
 		$this->load->view('header',$data);
 		$this->load->view('play_game',$words);
 		$this->load->view('footer');
@@ -19,7 +27,9 @@ class Game extends CI_Controller {
 
 	public function userChoice()
 	{
-		error_log($this->input->post('choice'),0);
+		$this->load->view('test');
+		$char_choice = $this->input->post('choice');
+		array_push($_SESSION['user_choice'],$char_choice); //add character to session
 	}
 
 	/**
