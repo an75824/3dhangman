@@ -22,7 +22,7 @@ $(document).ready(function() {
 					if (result) {
 						$('#user_input').val('');
 						$( '#hang_image' ).attr("src","assets/img/level1.png");
-						$('.word').text(result);
+						$('.word').html(result);
 						console.log(result);
 					}
 				}
