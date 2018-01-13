@@ -14,5 +14,5 @@
 		</div>
 	</div>
 </div>
-<p class = 'word'><?=$first_str;?></p>
+<div class = 'word'><?=$first_str;?></div>
 
