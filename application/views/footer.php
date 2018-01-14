@@ -20,10 +20,7 @@ $(document).ready(function() {
 				data: {choice:choice},
 				success: function(result) {
 					if (result) {
-						$('#user_input').val('');
-						$( '#hang_image' ).attr("src","assets/img/level1.png");
 						$('.word').html(result);
-						console.log(result);
 					}
 				}
 			});//end fo ajax
