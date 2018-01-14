@@ -23,8 +23,9 @@ class Game extends CI_Controller {
 
 		$session_data = array(
 			'word' => $word,
-			'round' => 0,
+			'round' => 1,
 			'result' => '',
+			'img' => 0,
 			'user_choice' => array()
 		); //create some session data
 		$this->session->set_userdata($session_data); //store session data
@@ -37,26 +38,29 @@ class Game extends CI_Controller {
 	public function userChoice()
 	{
 		$char_choice = strtolower($this->input->post('choice'));
+		$attempt = $_SESSION['round'];
 
-		if ($this->storeChar($char_choice))
-		{
-			if ($this->roundCount(false) <= MAX_TRIES)
+		if ($attempt <= MAX_TRIES )
+		{		
+			if ($this->storeChar($char_choice))
 			{
-				error_log("OK smaller: ".$_SESSION['round'],0);
+				$this->getInput($char_choice); //store the last structure of the word
+				$this->load->view('game_result');
 			} else {
-				error_log("Limit exceeded: ". $_SESSION['round'],0);
+				$data['duplicate_char'] = $char_choice;
+				$this->load->view('game_result',$data);
 			}
-			$this->getInput(); //store the last structure of the word
-			$this->load->view('game_result');
-		} else {
-			$data['duplicate_char'] = $char_choice;
-			$this->load->view('game_result',$data);
+		}//end if for attempt
+
+		if ($this->checkResult())
+		{
+			redirect('game/game_over');
 		}
-		if ($this->roundCount(false) == MAX_TRIES)
-			{
-				#redirect('game/end_of_game');
-				error_log("OK die now unless its the right guess!",0);
-			}
+
+		if ($attempt == MAX_TRIES)
+		{
+			redirect('game/game_over');
+		}
 	}
 
 	/**
@@ -78,8 +82,7 @@ class Game extends CI_Controller {
 		if (sizeof($storedChars) == 0)
 		{
 			array_push($_SESSION['user_choice'],$char);
-			//$this->roundCount(true);
-			//$this->calculateScore();
+			$_SESSION['round']++;
 			return true;
 		}
 		if (in_array($char,$storedChars))
@@ -87,17 +90,33 @@ class Game extends CI_Controller {
 			return false; //do not record duplicated input - not fair to lose because of this!
 		} else {
 			array_push($_SESSION['user_choice'],$char);
-			//$this->roundCount(true);
-			//$this->calculateScore();
+			$_SESSION['round']++;
 			return true;
-		}
+		} //end of if attempt
 	}//end of method
+	
+	public function game_over()
+	{
+		if (!$this->checkResult())
+		{
+			$_SESSION['img'] = 5;
+		}
+		$this->calculateScore();
+		$this->load->view('game_over');
+	}
 
 	private function getInput()
 	{
 		$chars_word = str_split($_SESSION['word']); //create array of chars from the word
 		$chars_user = $_SESSION['user_choice'];
-		$result = '';
+
+		if (!in_array(end($chars_user),$chars_word))
+		{
+			$_SESSION['img']++; //if the input is wrong, increase the img number
+		}
+
+		$result = ''; //init the output
+		/* Construct the output string  */
 		foreach($chars_word as $c)
 		{
 			if (in_array($c, $chars_user))
@@ -107,21 +126,46 @@ class Game extends CI_Controller {
 				$result .= '_';
 			}//end if
 		}//end foreach
+
 		$_SESSION['result'] = $result; //update the session variable
-		$_SESSION['round']++;
+		if ($result == $_SESSION['word'])
+		{	
+			redirect('game/game_over');
+		}
 		return $result;
 	}//end of method
+
+	private function checkResult()
+	{
+		$current_input = $_SESSION['result'];
+		$word = $_SESSION['word'];
+
+		if ($current_input == $word)
+		{
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * Calculate the score for the player.
 	 * The length of the word gives extra points as well as the less rounds.
 	**/
-	private function calculateScore($right_guess = 0)
+	private function calculateScore()
 	{
 		$round = $_SESSION['round'];
-		$word_length = $_SESSION['word'];
-		$full_input = (isset($_SESSION['full_input'])) ? $_SESSION['full_input'] : 0; //full word input
-		$score = 100 * $word_length - (30 * $round) + $full_input + $right_guess;
+		$word_length = strlen($_SESSION['word']); //the word we are looking for
+		$current_result = $_SESSION['result'];
+		$pure_str = str_replace("_","",$current_result);
+		$str_length = strlen($pure_str);
+		if ($str_length == 0)
+		{
+			$score = 0;
+		} else {
+			$full_input = (isset($_SESSION['full_input'])) ? $_SESSION['full_input'] : 0; //full word input
+			$score = 100 * $word_length - (30 * $round) + $full_input + (10 * $str_length);
+		}
 		return $score;
 	}
 }//end of class
