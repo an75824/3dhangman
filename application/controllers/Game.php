@@ -101,8 +101,8 @@ class Game extends CI_Controller {
 		{
 			$_SESSION['img'] = 5;
 		}
-		$this->calculateScore();
-		$this->load->view('game_over');
+		$data['score'] = $this->calculateScore();
+		$this->load->view('game_over',$data);
 	}
 
 	private function getInput()
