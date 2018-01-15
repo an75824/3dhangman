@@ -9,6 +9,11 @@
 
 <script type = 'text/javascript'>
 $(document).ready(function() {
+
+	/* Dont allow forms to submit any data when pressing enter */
+	$("form").submit(function(e) {
+		e.preventDefault();
+	});
 	$('.submit_form').click(function(e) {
 		var choice = $('#user_input').val();
 		if (choice.length == 1) {
