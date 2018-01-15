@@ -186,8 +186,6 @@ class Game extends CI_Controller {
 			$score = 0;
 		} else {
 			$full_input = (isset($_SESSION['full_input'])) ? 100 : 0; //full word input
-			var_dump($_SESSION['full_input']);
-			error_log($full_input,0);
 			$score = 100 * $word_length - (30 * $round) + $full_input + (10 * $str_length);
 		}
 		return $score;
