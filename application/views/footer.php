@@ -15,7 +15,7 @@ $(document).ready(function() {
 		if (choice.length > 0) {
 			$.ajax({
 				type: "POST",
-				url: "/3dhangman/game/userChoice",
+				url: "<?=base_url();?>"+"game/userChoice",
 				//dataType: 'json',
 				data: {choice:choice},
 				success: function(result) {
