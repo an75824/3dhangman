@@ -94,6 +94,27 @@ class Game extends CI_Controller {
 			return true;
 		} //end of if attempt
 	}//end of method
+
+	public function fullWord()
+	{
+		$word = strtolower($this->input->post('word'));
+		$attempt = $_SESSION['round'];
+		if ($attempt < MAX_TRIES )
+		{
+			if ($word == $_SESSION['word'])
+			{
+				$_SESSION['result'] = $word; //update the session variable
+				$_SESSION['full_input'] = TRUE;
+				$this->game_over();
+			} else {
+				$_SESSION['round']++;
+				$this->load->view('game_result');
+			}
+		} else {
+			$_SESSION['round']++;
+			redirect('game/game_over');
+		}
+	}
 	
 	public function game_over()
 	{
@@ -103,6 +124,7 @@ class Game extends CI_Controller {
 		}
 		$data['score'] = $this->calculateScore();
 		$this->load->view('game_over',$data);
+		session_destroy();
 	}
 
 	private function getInput()
@@ -163,7 +185,9 @@ class Game extends CI_Controller {
 		{
 			$score = 0;
 		} else {
-			$full_input = (isset($_SESSION['full_input'])) ? $_SESSION['full_input'] : 0; //full word input
+			$full_input = (isset($_SESSION['full_input'])) ? 100 : 0; //full word input
+			var_dump($_SESSION['full_input']);
+			error_log($full_input,0);
 			$score = 100 * $word_length - (30 * $round) + $full_input + (10 * $str_length);
 		}
 		return $score;

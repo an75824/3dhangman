@@ -30,7 +30,9 @@
         $('#score_modal').modal('show');
 	var img = "assets/img/level"+<?=$_SESSION['img'];?>+".png";
 	$("#user_input").attr("disabled", "disabled");
-	$( '#hang_image' ).attr("src",img);
+	$('#full_word').attr('disabled', 'disabled');
+	$('#submit_full_word').attr('disabled', 'disabled');
+	$('#hang_image' ).attr("src",img);
 	$('.submit_form').remove();
 </script>
 

@@ -10,9 +10,8 @@
 <script type = 'text/javascript'>
 $(document).ready(function() {
 	$('.submit_form').click(function(e) {
-		var hostname = $(location).attr('host'); //not in use
 		var choice = $('#user_input').val();
-		if (choice.length > 0) {
+		if (choice.length == 1) {
 			$.ajax({
 				type: "POST",
 				url: "<?=base_url();?>"+"game/userChoice",
@@ -26,6 +25,22 @@ $(document).ready(function() {
 			});//end fo ajax
 		} //end of input check
 	}); //end of submit_form click
+
+	$('#submit_full_word').click(function(e) {
+		var word = $('#full_word').val();
+		$.ajax({
+			type: 'POST',
+			url: "<?=base_url();?>"+"game/fullWord",
+			data: {word:word},
+			success : function(result) {
+				if (result)
+				{
+					$('.word').html(result);
+				}
+			}//end of success
+		});//end of ajax
+	});//end of submit_full_word click
+
 }); //end of document ready function
 
 </script>

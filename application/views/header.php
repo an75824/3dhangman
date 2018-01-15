@@ -21,5 +21,31 @@
     <![endif]-->
   </head>
   <body>
+<!-- Modal for inputting the full word -->
+<div class="modal" id = 'word_modal' tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter the word</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<div class="form-group">
+		<?= form_open(); ?>
+			<label for="full_word">Word:</label>
+			<input type="text" class="form-control" id="full_word">
+		</form>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id = 'submit_full_word'>Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="container">
 
