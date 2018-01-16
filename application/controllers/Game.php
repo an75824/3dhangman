@@ -99,7 +99,7 @@ class Game extends CI_Controller {
 	{
 		$word = strtolower($this->input->post('word',TRUE));
 		$attempt = $_SESSION['round'];
-		if ($attempt < MAX_TRIES )
+		if ($attempt <= MAX_TRIES )
 		{
 			if ($word == $_SESSION['word'])
 			{
@@ -112,11 +112,13 @@ class Game extends CI_Controller {
 				$data['word_input'] = $word;
 				$this->load->view('game_result',$data);
 			}
-		} else {
-			$_SESSION['round']++;
-			redirect('game/game_over');
+		} 
+		if ($attempt == MAX_TRIES)
+		{
+			$_SESSION['result'] = $word;
+			$_SESSION['full_input'] = TRUE;
+			$this->game_over();
 		}
-
 	}
 	
 	public function game_over()

@@ -20,7 +20,6 @@
 </div>
 
 <script type='text/javascript'>
-
 	/* Close modal only using the buttons */
 	$('#score_modal').modal({
 		backdrop: 'static',
@@ -34,5 +33,8 @@
 	$('#submit_full_word').attr('disabled', 'disabled');
 	$('#hang_image' ).attr("src",img);
 	$('.submit_form').remove();
+	$('.word_submit').remove();
+        $('#word_modal').modal('toggle');
+	$('#word_modal').modal('hide');
 </script>
 
