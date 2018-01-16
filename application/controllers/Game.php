@@ -37,7 +37,7 @@ class Game extends CI_Controller {
 
 	public function userChoice()
 	{
-		$char_choice = strtolower($this->input->post('choice'));
+		$char_choice = strtolower($this->input->post('choice',TRUE));
 		$attempt = $_SESSION['round'];
 
 		if ($attempt <= MAX_TRIES )
@@ -97,7 +97,7 @@ class Game extends CI_Controller {
 
 	public function fullWord()
 	{
-		$word = strtolower($this->input->post('word'));
+		$word = strtolower($this->input->post('word',TRUE));
 		$attempt = $_SESSION['round'];
 		if ($attempt < MAX_TRIES )
 		{
@@ -114,6 +114,7 @@ class Game extends CI_Controller {
 			$_SESSION['round']++;
 			redirect('game/game_over');
 		}
+
 	}
 	
 	public function game_over()
@@ -185,7 +186,7 @@ class Game extends CI_Controller {
 		{
 			$score = 0;
 		} else {
-			$full_input = (isset($_SESSION['full_input'])) ? 100 : 0; //full word input
+			$full_input = (isset($_SESSION['full_input'])) ? 100 : 0; //The right full word will give 100 points
 			$score = 100 * $word_length - (30 * $round) + $full_input + (10 * $str_length);
 		}
 		return $score;
