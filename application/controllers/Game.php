@@ -108,7 +108,9 @@ class Game extends CI_Controller {
 				$this->game_over();
 			} else {
 				$_SESSION['round']++;
-				$this->load->view('game_result');
+				$_SESSION['img']++;
+				$data['word_input'] = $word;
+				$this->load->view('game_result',$data);
 			}
 		} else {
 			$_SESSION['round']++;

@@ -38,6 +38,7 @@
 			<input type="text" class="form-control" id="full_word">
 		</form>
 		</div>
+	<div class = "word_input"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id = 'submit_full_word'>Submit</button>

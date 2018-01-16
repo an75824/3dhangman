@@ -33,17 +33,22 @@ $(document).ready(function() {
 
 	$('#submit_full_word').click(function(e) {
 		var word = $('#full_word').val();
-		$.ajax({
-			type: 'POST',
-			url: "<?=base_url();?>"+"game/fullWord",
-			data: {word:word},
-			success : function(result) {
-				if (result)
-				{
-					$('.word').html(result);
-				}
-			}//end of success
-		});//end of ajax
+		if (word.length>0 && $.trim(word)!='')
+		{
+			$.ajax({
+				type: 'POST',
+				url: "<?=base_url();?>"+"game/fullWord",
+				data: {word:word},
+				success : function(result) {
+					if (result)
+					{
+						$('#full_word').val('');
+						$('.word').html(result);
+					}
+				}//end of success
+			});//end of ajax
+		}//end if for length and whitespaces
+		$('#full_word').val('');
 	});//end of submit_full_word click
 
 }); //end of document ready function
