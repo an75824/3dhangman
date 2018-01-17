@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://127.0.0.1/3dhangman/';
+$local_ip = $_SERVER['SERVER_ADDR']; //does not work with vagrant
+$config['base_url'] = 'http://'.$local_ip.'/3dhangman/';
 
 /*
 |--------------------------------------------------------------------------
