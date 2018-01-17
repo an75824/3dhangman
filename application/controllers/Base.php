@@ -18,25 +18,6 @@ class Base extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function firstTry()
-	{
-		$this->load->model('word_model');
-		$arr = $this->word_model->getWords();
-		$w = $arr[4]['word']; // this will be the word from json
-		$c = str_split($w); //create an array out of the word
-		$d = ['r']; // this will be the user input
-
-		foreach ($c as $char) //This will be the core of the game
-		{
-			if (in_array($char, $d))
-			{
-				echo $char;
-			} else {
-				echo "_ ";
-			}
-		}
-	}//end of method
-
 	/**
 	 * If javascript is not enabled redirect to the error page
 	**/
