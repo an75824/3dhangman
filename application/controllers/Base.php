@@ -36,5 +36,14 @@ class Base extends CI_Controller {
 			}
 		}
 	}//end of method
+
+	/**
+	 * If javascript is not enabled redirect to the error page
+	**/
+	public function noJs()
+	{
+		$this->load->view('errors/html/error_nojs');
+	}
+
 }
 

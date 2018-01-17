@@ -12,6 +12,11 @@
     <meta name='author' content='Antony'>
 
     <title><?=$title;?></title>
+
+	<noscript>
+ 		<META HTTP-EQUIV="Refresh" CONTENT="0;URL=base/noJs">
+	</noscript>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
 	<link rel="stylesheet" href="<?=base_url('assets/css/main.css');?>" />
@@ -61,13 +66,14 @@
       <div class="modal-body">
 		<div class="form-group">
 		<?= form_open(); ?>
-		<p class = 'score'></p>
+			<p class = 'score'></p>
+			<label for="full_word">Pen Name:</label>
+			<input type="text" class="form-control" id="pen_name">
 		</form>
 		</div>
-	<div class = "word_input"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id = 'submit_full_word'>Save</button>
+        <button type="button" class="btn btn-primary" id = 'submit_score'>Save</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Exit</button>
       </div>
     </div>
