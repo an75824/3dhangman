@@ -11,7 +11,7 @@
 		<?=$score;?>
         </div>
         <div class="modal-footer">
-	  <button type="button" class="btn btn-info" data-dismiss="modal">Save Score</button>
+	  <button type="button" class="save_score btn btn-info" data-dismiss="modal">Save Score</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -20,6 +20,7 @@
 </div>
 
 <script type='text/javascript'>
+$(document).ready(function() {
 	/* Close modal only using the buttons */
 	$('#score_modal').modal({
 		backdrop: 'static',
@@ -36,5 +37,12 @@
 	$('.word_submit').remove();
         $('#word_modal').modal('toggle');
 	$('#word_modal').modal('hide');
+
+	$('.save_score').click(function(){
+		var score = "<?=$score;?>"; //store score in JS var
+		$('#modal_save_score').modal('show');
+		$('.score').html("Score: " + score);
+	});
+});
 </script>
 

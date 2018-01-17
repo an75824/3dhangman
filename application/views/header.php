@@ -48,5 +48,32 @@
   </div>
 </div>
 
+<!-- Modal for saving the score -->
+<div class="modal" id = 'modal_save_score' tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Save your score!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<div class="form-group">
+		<?= form_open(); ?>
+		<p class = 'score'></p>
+		</form>
+		</div>
+	<div class = "word_input"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id = 'submit_full_word'>Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Exit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <div class="container">
 
