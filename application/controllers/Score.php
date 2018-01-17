@@ -38,7 +38,8 @@ class Score extends CI_Controller {
 
 	public function results()
 	{
-		$this->load->view('modal_results');
+		$data['scores'] = $this->getScores();
+		$this->load->view('modal_results',$data);
 	}
 
 	/**

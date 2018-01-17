@@ -1,4 +1,5 @@
 <?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"  id='score_modal'>
     <div class="modal-dialog modal-sm">
@@ -51,6 +52,11 @@ $(document).ready(function() {
 		var pen_name = $('#pen_name').val();
 		if (pen_name.length>0 && $.trim(pen_name)!='')
 		{
+			/*Prepend div with loading image */
+			var base_url = '<?=base_url('assets/img/loading.gif');?>';
+			var loading_image = "<div id='loading' style = 'width:100%;height:100%;z-index:10000;'><img src = '"+ base_url +"'></div>";
+
+			$('.container').prepend(loading_image);
 			$.ajax({
 				type: 'POST',
 				url: "<?=base_url();?>"+"score/setScore",
@@ -58,7 +64,11 @@ $(document).ready(function() {
 				success : function(result) {
 					if (result)
 					{
-						console.log(result);
+						$('#modal_save_score').modal('toggle');
+						$('#modal_save_score').modal('hide');
+						$('#loading').hide(); //hide the loading image
+						$('#modal_score').modal('show');
+						$('#results_modal_body').html(result);
 					}
 				}//end of success
 			});//end of ajax
