@@ -1,14 +1,15 @@
 <?php
 ?>
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  id='score_modal'>
-    <div class="modal-dialog">
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"  id='score_modal'>
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">X</button>
           <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>End of Game</h4>
         </div>
         <div class="modal-body">
-		<?=$score;?>
+		<p>Your score is:</p>
+		<center><?=$score;?></center>
         </div>
         <div class="modal-footer">
 	  <button type="button" class="save_score btn btn-info" data-dismiss="modal">Save Score</button>
@@ -21,6 +22,7 @@
 
 <script type='text/javascript'>
 $(document).ready(function() {
+
 	/* Close modal only using the buttons */
 	$('#score_modal').modal({
 		backdrop: 'static',
@@ -43,6 +45,26 @@ $(document).ready(function() {
 		$('#modal_save_score').modal('show');
 		$('.score').html("Score: " + score);
 	});
+
+	$('#submit_score').click(function(e) {
+		var score = "<?=$score;?>"; //store score in JS var
+		var pen_name = $('#pen_name').val();
+		if (pen_name.length>0 && $.trim(pen_name)!='')
+		{
+			$.ajax({
+				type: 'POST',
+				url: "<?=base_url();?>"+"score/setScore",
+				data: {score:score, pen_name:pen_name},
+				success : function(result) {
+					if (result)
+					{
+						console.log(result);
+					}
+				}//end of success
+			});//end of ajax
+		}//end if for length and whitespaces
+		$('#pen_word').val('');
+	}); //end of submit_score click function
 });
 </script>
 

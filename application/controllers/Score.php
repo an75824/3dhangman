@@ -16,13 +16,39 @@ class Score extends CI_Controller {
 		$arr = $this->score_model->getScores();
 		$new_data['name'] = "Test";
 		$new_data['score'] = "4321";
-		array_push($arr,$new_data);
-		file_put_contents("score.json", json_encode($arr));
+	
+		//file_put_contents("score.json", json_encode($arr));
 		foreach ($arr as $b)
 		{
 			echo $b['name']." score=".$b['score']."<br />";
 		}
+	}
 
+	public function setScore()
+	{
+		$score = $this->input->post('score',true);
+		$pen_name = $this->input->post('pen_name',true);
+		$data = array('name' => $pen_name, 'score' => $score);
+		$scores = $this->getScores();//array of scores
+		array_push($scores,$data);
+		$this->load->model('score_model');
+		$this->score_model->saveFile($scores);
+		redirect('score/results');
+	}
+
+	public function results()
+	{
+		$this->load->view('modal_results');
+	}
+
+	/**
+	 * Return an array with scores
+	**/
+	private function getScores()
+	{
+		$this->load->model('score_model');
+		$arr = $this->score_model->getScores();
+		return $arr;
 	}
 }
 
