@@ -51,6 +51,10 @@ $(document).ready(function() {
 		$('#full_word').val('');
 	});//end of submit_full_word click
 
+	$('#dead_end').click(function() {
+		console.log('redirect to home page');
+	}); //end of dead_end click function
+
 }); //end of document ready function
 
 </script>
