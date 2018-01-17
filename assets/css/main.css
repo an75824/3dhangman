@@ -1,6 +1,3 @@
-body, html {
-  height: 100%;
-}
 
 body {
 	background-color: #eee;
@@ -22,3 +19,4 @@ body {
 .input_chars {
 	font-size:20px;
 }
+
