@@ -29,6 +29,11 @@ $(document).ready(function() {
 		backdrop: 'static',
 		keyboard: false
 	});
+	var score = "<?=$score;?>"; //store score in JS var
+	if (score <= 0)
+	{
+		$('.save_score').attr('disabled','disabled');
+	}
 
         $('#score_modal').modal('show');
 	var img = "assets/img/level"+<?=$_SESSION['img'];?>+".png";
@@ -42,7 +47,6 @@ $(document).ready(function() {
 	$('#word_modal').modal('hide');
 
 	$('.save_score').click(function(){
-		var score = "<?=$score;?>"; //store score in JS var
 		$('#modal_save_score').modal('show');
 		$('.score').html("Score: " + score);
 	});

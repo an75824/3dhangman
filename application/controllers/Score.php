@@ -21,9 +21,13 @@ class Score extends CI_Controller {
 
 	public function setScore()
 	{
+		$score = $this->input->post('score',true);
+		if ($score <= 0)
+		{
+			die('O not allowed!');//error_log('Its 0',0);
+		}
 		$date_today = '%d/%M/%Y';
 		$date_str = mdate($date_today);
-		$score = $this->input->post('score',true);
 		$pen_name = $this->input->post('pen_name',true);
 		$data = array('name' => $pen_name, 'score' => $score, 'date' => $date_str);
 		$scores = $this->getScores();//array of scores
