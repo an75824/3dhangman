@@ -19,16 +19,8 @@
     this.opt = $.extend({},this.defaultOpt,options)
   }
   Wload.prototype.hide = function(obj){
-    if(obj.time){
-      var _this = this
-      setTimeout(function(){
-        $(_this.opt.el).find('.w_load_body').remove()
-        $(_this.opt.el).removeClass('w_load_body_parent')
-      },obj.time)
-    }else{
       $(this.opt.el).find('.w_load_body').remove()
       $(this.opt.el).removeClass('w_load_body_parent')
-    }
   }
   Wload.prototype.bindEvent = function(){}
   Wload.prototype.creatDom = function(){
