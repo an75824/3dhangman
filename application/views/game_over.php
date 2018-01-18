@@ -14,7 +14,7 @@
         </div>
         <div class="modal-footer">
 	  <button type="button" class="save_score btn btn-info" data-dismiss="modal">Save Score</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="close_score btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
 
@@ -49,6 +49,11 @@ $(document).ready(function() {
 	$('.save_score').click(function(){
 		$('#modal_save_score').modal('show');
 		$('.score').html("Score: " + score);
+	});
+
+	$('.close_score').click(function() {
+		url = "<?=base_url();?>";
+		window.location.href = url;
 	});
 
 	$('#submit_score').click(function(e) {
