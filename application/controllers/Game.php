@@ -26,6 +26,7 @@ class Game extends CI_Controller {
 			'round' => 1,
 			'result' => '',
 			'img' => 0,
+			'wrong_attempt' => 0,
 			'user_choice' => array()
 		); //create some session data
 		$this->session->set_userdata($session_data); //store session data
@@ -107,6 +108,7 @@ class Game extends CI_Controller {
 				$_SESSION['full_input'] = TRUE;
 				$this->game_over();
 			} else {
+				$_SESSION['wrong_attempt']++;
 				$_SESSION['round']++;
 				$_SESSION['img']++;
 				$data['word_input'] = $word;
@@ -115,8 +117,11 @@ class Game extends CI_Controller {
 		} 
 		if ($attempt == MAX_TRIES)
 		{
-			$_SESSION['result'] = $word;
-			$_SESSION['full_input'] = TRUE;
+			if ($word == $_SESSION['word'])
+			{
+				$_SESSION['result'] = $word;
+				$_SESSION['full_input'] = TRUE;
+			}
 			$this->game_over();
 		}
 	}
@@ -158,6 +163,7 @@ class Game extends CI_Controller {
 		{	
 			redirect('game/game_over');
 		}
+
 		return $result;
 	}//end of method
 
@@ -174,6 +180,15 @@ class Game extends CI_Controller {
 		}
 	}
 
+	
+	private function getWrongAttempts()
+	{
+		$user_choice = $_SESSION['user_choice'];
+		$word = str_split($_SESSION['word']);
+		$differences = array_diff($user_choice, $word);
+		$_SESSION['wrong_attempt'] += sizeof($differences);
+	}//end of getAttemptsStatus
+
 	/**
 	 * Calculate the score for the player.
 	 * The length of the word gives extra points as well as the less rounds.
@@ -183,14 +198,19 @@ class Game extends CI_Controller {
 		$round = $_SESSION['round'];
 		$word_length = strlen($_SESSION['word']); //the word we are looking for
 		$current_result = $_SESSION['result'];
+		$user_choice = $_SESSION['user_choice'];
 		$pure_str = str_replace("_","",$current_result);
 		$str_length = strlen($pure_str);
+		$wrong_attempt = $_SESSION['wrong_attempt'];
+		$wrong_attemp = ($wrong_attempt >= 6) ? 5 : ''; //if worng attempt goes above 5 then make sure if will be five
 		if ($str_length == 0)
 		{
 			$score = 0;
 		} else {
-			$full_input = (isset($_SESSION['full_input'])) ? 100 : 0; //The right full word will give 100 points
-			$score = 100 * $word_length - (30 * $round) + $full_input + (10 * $str_length);
+			$wrong_attempts = $this->getWrongAttempts();
+			$full_input = (isset($_SESSION['full_input'])) ? 50 : 0; //The right full word will give 50 points
+			$score = 20 * $word_length - (10 * $round) + $full_input + (10 * $str_length) - (5*$wrong_attempts);
+error_log("Word length:$word_length, round:$round, full_input:$full_input, str_length:$str_length, wrong_attempts:$wrong_attempt",0);
 		}
 		return $score;
 	}
