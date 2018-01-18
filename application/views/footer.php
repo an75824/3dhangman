@@ -52,7 +52,8 @@ $(document).ready(function() {
 	});//end of submit_full_word click
 
 	$('#dead_end').click(function() {
-		console.log('redirect to home page');
+		url = "<?=base_url();?>";
+		window.location.href = url;
 	}); //end of dead_end click function
 
 }); //end of document ready function

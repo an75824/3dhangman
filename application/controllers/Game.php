@@ -129,7 +129,6 @@ class Game extends CI_Controller {
 		}
 		$data['score'] = $this->calculateScore();
 		$this->load->view('game_over',$data);
-		session_destroy();
 	}
 
 	private function getInput()
