@@ -23,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$local_ip = $_SERVER['SERVER_ADDR']; //does not work with vagrant
-$config['base_url'] = 'http://'.$local_ip.'/3dhangman/';
+$config['base_url'] = 'http://127.0.0.1/3dhangman/';
 
 /*
 |--------------------------------------------------------------------------
@@ -381,7 +380,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = '/var/ci_sessions/';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
