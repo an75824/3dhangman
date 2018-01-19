@@ -210,7 +210,6 @@ class Game extends CI_Controller {
 			$wrong_attempts = $this->getWrongAttempts();
 			$full_input = (isset($_SESSION['full_input'])) ? 50 : 0; //The right full word will give 50 points
 			$score = 20 * $word_length - (10 * $round) + $full_input + (10 * $str_length) - (5*$wrong_attempts);
-error_log("Word length:$word_length, round:$round, full_input:$full_input, str_length:$str_length, wrong_attempts:$wrong_attempt",0);
 		}
 		return $score;
 	}
