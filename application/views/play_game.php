@@ -1,3 +1,8 @@
+<?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+<a href = "<?=base_url();?>"><span class="glyphicon glyphicon-home hidden-xs"></span></a>
 <div class = 'row'>
 	<div class = 'col-md-6'>
 		<img src = "<?=base_url('assets/img/level0.png');?>" class='img-responsive' alt='The hang!' id='hang_image' >
