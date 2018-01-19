@@ -1,6 +1,6 @@
 # 3DHangman
 
-Live demo:
+Live demo (<b>available soon</b>):
 <a href = 'http://3dhangman.virtualcollaboration.co.uk'>Click here</a> <br />
 
 ### Docker
