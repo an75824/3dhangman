@@ -133,6 +133,15 @@ class Game extends CI_Controller {
 			$_SESSION['img'] = 5;
 		}
 		$data['score'] = $this->calculateScore();
+		$img_num = $_SESSION['img'];
+		if ($img_num == 0 )
+		{
+			$data['msg'] = 'flawless victory! No errors!';
+		} elseif($img_num>1 && $img_num<=5) {
+			$data['msg'] = 'You need to try harder!';
+		}else {
+			$data['msg'] = 'Nice try!';
+		}
 		$this->load->view('game_over',$data);
 	}
 

@@ -6,7 +6,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">X</button>
-          <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>End of Game</h4>
+          <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i><div id='title_msg'></div></h4>
         </div>
         <div class="modal-body">
 		<p>Your score is:</p>
@@ -30,6 +30,8 @@ $(document).ready(function() {
 		keyboard: false
 	});
 	var score = "<?=$score;?>"; //store score in JS var
+	var msg = "<?=$msg;?>";
+	$('#title_msg').html(msg);
 	if (score <= 0)
 	{
 		$('.save_score').attr('disabled','disabled');
