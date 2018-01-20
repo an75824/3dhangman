@@ -23,9 +23,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$port = (defined('DOCKER_PORT')) ? DOCKER_PORT : '80';
 
-$config['base_url'] = 'http://127.0.0.1:'.$port.'/3dhangman/';
+if (defined('DOCKER_PORT'))
+{
+	$config['base_url'] = 'http://127.0.0.1:'.DOCKER_PORT.'/3dhangman/';
+} else {
+	$config['base_url'] = 'http://127.0.0.1/3dhangman/';
+}
 
 /*
 |--------------------------------------------------------------------------
