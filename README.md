@@ -18,3 +18,12 @@ and change the <code>$config['base_url']</code> variable to: <br />
 <code>$config['base_url'] = 'http://your_url/3dhangman'</code>
 <br />
 I removed <code>index.php</code> from the URL, for further information please have a look in <code>.htaccess</code> which is in the root folder.
+<br />
+Always make sure that apache can use <code>.htaccess:</code><br />
+```
+Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride all
+        Require all granted
+</Directory>
+```
