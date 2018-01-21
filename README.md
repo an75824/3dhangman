@@ -28,9 +28,9 @@ Directory /var/www/>
 </Directory>
 ```
 
-### Testing branch
+### Testing branch (Won't work as a submodule)
 A new testing branch has been created in order to test some of the functions. <br />
-Currently it is not merged with the master one so you have to checkout it out in order to use it.<br />
+Currently it is not merged with the master one so you have to checkout it.<br />
 ci-phpunit-test is a submodule that is used in order to facilitate the test. <br />
 Instructions after you have cloned the application: <br />
 ```
