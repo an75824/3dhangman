@@ -29,12 +29,17 @@ class Score extends CI_Controller {
 		$date_today = '%d/%M/%Y';
 		$date_str = mdate($date_today);
 		$pen_name = $this->input->post('pen_name',true);
-		$data = array('name' => $pen_name, 'score' => $score, 'date' => $date_str);
-		$scores = $this->getScores();//array of scores
-		array_push($scores,$data);
-		$this->load->model('score_model');
-		$this->score_model->saveFile($scores);
-		redirect('score/results');
+		if (strlen($pen_name) <= 15)
+		{
+			$data = array('name' => $pen_name, 'score' => $score, 'date' => $date_str);
+			$scores = $this->getScores();//array of scores
+			array_push($scores,$data);
+			$this->load->model('score_model');
+			$this->score_model->saveFile($scores);
+			redirect('score/results');
+		} else {
+			die('Maximum name length of 15 exceeded, exiting now.'); //needs to be a view
+		}
 	}
 
 	public function results()
