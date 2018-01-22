@@ -1,3 +1,0 @@
-[submodule "application/ci-phpunit-test"]
-	path = application/ci-phpunit-test
-	url = https://github.com/kenjis/ci-phpunit-test
