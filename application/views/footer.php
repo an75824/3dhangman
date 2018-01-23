@@ -14,6 +14,7 @@ $(document).ready(function() {
 	$("form").submit(function(e) {
 		e.preventDefault();
 	});
+
 	$('.submit_form').click(function(e) {
 		var choice = $('#user_input').val();
 		if (choice.length == 1) {

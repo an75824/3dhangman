@@ -27,3 +27,19 @@ Directory /var/www/>
         Require all granted
 </Directory>
 ```
+
+### Testing branch (Won't work as a submodule)
+A new testing branch has been created in order to test some of the functions. <br />
+Currently it is not merged with the master one so you have to checkout it.<br />
+ci-phpunit-test is a submodule that is used in order to facilitate the test. <br />
+Instructions after you have cloned the application: <br />
+```
+git checkout testing
+git submodule init
+git submodule update
+cd application/ci-phpunit-test/application
+mv tests ../../
+cd ../../
+rm -rf application/ci-phpunit-test
+```
+So, we only need the <code>tests</code> folder from that project and needs to be palced in our <code>application</code> folder.

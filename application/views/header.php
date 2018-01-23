@@ -69,7 +69,7 @@
 		<?= form_open(); ?>
 			<p class = 'score'></p>
 			<label for="full_word">Pen Name:</label>
-			<input type="text" class="form-control" id="pen_name">
+			<input type="text" class="form-control" id="pen_name" maxlength='15'>
 		</form>
 		</div>
       </div>

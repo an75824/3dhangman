@@ -61,7 +61,7 @@ $(document).ready(function() {
 	$('#submit_score').click(function(e) {
 		var score = "<?=$score;?>"; //store score in JS var
 		var pen_name = $('#pen_name').val();
-		if (pen_name.length>0 && $.trim(pen_name)!='')
+		if (pen_name.length>0 && $.trim(pen_name)!='' && pen_name.length<=15)
 		{
 			$('body').Wload(); //enablig the loading image
 			$('#modal_save_score').modal('toggle');

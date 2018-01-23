@@ -39,6 +39,11 @@ class Game extends CI_Controller {
 	public function userChoice()
 	{
 		$char_choice = strtolower($this->input->post('choice',TRUE));
+		if (strlen($char_choice)!=1)
+		{
+			return false; //This method must only accept one character
+		}
+
 		$attempt = $_SESSION['round'];
 
 		if ($attempt <= MAX_TRIES )
