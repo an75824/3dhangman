@@ -12,7 +12,7 @@ class Word_model extends CI_Model {
 	**/
 	public function getWords()
 	{
-		$json = read_file('words/words.json');
+		$json = read_file('data/words/words.json');
 		$arr = json_decode($json,true); //true will return an array
 		return $arr;
 	}//end of method

@@ -4,7 +4,7 @@ WORKDIR .
 
 ADD . /var/www/html/3dhangman
 
-RUN chown -R www-data /var/www/html/3dhangman/score
+RUN chown -R www-data /var/www/html/3dhangman/data/score
 
 COPY apache2.conf /etc/apache2/
 
