@@ -24,13 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-if (defined('DOCKER_PORT'))
-{
-	$config['base_url'] = 'http://127.0.0.1:'.DOCKER_PORT.'/3dhangman/';
-} else {
-	$config['base_url'] = 'http://127.0.0.1/3dhangman/';
-}
-
+$config['base_url'] = defined('DOCKER_PORT') ? 'http://127.0.0.1:'.DOCKER_PORT.'/3dhangman/' : '';
 /*
 |--------------------------------------------------------------------------
 | Index File
